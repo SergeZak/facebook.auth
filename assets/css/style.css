@@ -1,0 +1,44 @@
+ul.comment-list li{
+    list-style-type: none;
+}
+
+ul.comment-list li > p{
+    margin-left: 40px;
+    line-height: 1.0em;
+}
+
+ul.comment-list li img{
+    float: left;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+p.user-name{
+    font-size: 0.9em;
+    font-style: italic;
+    font-weight: 600;
+}
+
+p.comment-dates{
+    font-size: 0.8em;
+    color: #808080;
+}
+
+p.comment-body{
+    margin-bottom: 3px;
+}
+
+.comment-btns{
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+
+.comment-btns a{
+    margin-right: 10px;
+    text-decoration: underline;
+}
+
+.comment-btns a:hover{
+    text-decoration: none;
+}

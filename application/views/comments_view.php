@@ -14,6 +14,7 @@
 
         <?php if($userId){ ?>
 
+        <h4>Type a new comment. Have fun!</h4>
         <form action="/comments/add_comment" method="post" class="form-group">
             <textarea name="comment_body" class="form-control"></textarea>
             <input type="hidden" name="parent_id">
@@ -33,20 +34,22 @@
                     $tree = '<ul class="comment-list">';
                     foreach($commentsTree[$parent_id] as $comment){
 
-                        $commentBtn = $userId > 0 ? '<p><a href="javascript:void(0)" class="showModal" data-comment-id="'.$comment['id'].'">Comment</a></p>' : '';
-                        $editBtn = ($userId == $comment['fb_id'])? '<p><a href="javascript:void(0)" class="showEditModal" data-comment-id="'.$comment['id'].'">Edit</a></p>' : '';
+
+                        $editedDate = $comment['date_created'] == $comment['date_updated'] ? 'edited: <span>'.date("F j, Y, g:i a", strtotime($comment['date_updated'])) . '</span>' : '';
+                        $commentBtn = $userId > 0 ? '<a href="javascript:void(0)" class="showModal" data-comment-id="'.$comment['id'].'">Comment</a>' : '';
+                        $editBtn = ($userId == $comment['fb_id'])? '<a href="javascript:void(0)" class="showEditModal" data-comment-id="'.$comment['id'].'">Edit</a>' : '';
+
 
                         $tree .= '<li>
                                     <img src="'.$comment['picture'].'">
                                     <p class="user-name">'.$comment['username'] . '</p>
+                                    <p class="comment-body comment-body-'.$comment['id'].'">'.$comment['body'] . '</p>
                                     <p class="comment-dates">
-                                        created: <span>'.date("F j, Y, g:i a", strtotime($comment['date_created'])) . '</span>
-                                        updated: <span>'.date("F j, Y, g:i a", strtotime($comment['date_updated'])) . '</span>
+                                        posted: <span>'.date("F j, Y, g:i a", strtotime($comment['date_created'])) . '</span>.
+                                        '.$editedDate.'
                                     </p>
-                                    <p class="comment-body-'.$comment['id'].'">'.$comment['body'] . '</p>
 
-                                    '.$commentBtn
-                                    .$editBtn;
+                                    <div class="comment-btns">'.$commentBtn . $editBtn . '</div>';
 
                         $tree .=  build_tree($commentsTree,$comment['id'], $userId);
                         $tree .= '</li>';
