@@ -2,17 +2,26 @@
 
 class DB{
 
-    private $host = 'localhost';
-    private $db = 'facebook.auth';
-    private $user = 'facebook.auth';
-    private $pass = '12345';
-    private $charset = 'utf8';
+    private $host;
+    private $db ;
+    private $user;
+    private $pass ;
+    private $charset;
 
     private static $instance = null;
 
     private static $pdo;
 
     private function __construct(){
+
+        $params = parse_ini_file('config.ini');
+
+        $this->host = $params['db_host'];
+        $this->db = $params['db_name'];
+        $this->user = $params['db_username'];
+        $this->pass = $params['db_password'];
+        $this->charset = $params['db_charset'];
+
 
         $dsn = "mysql:host=$this->host;dbname=$this->db;charset=$this->charset";
 
