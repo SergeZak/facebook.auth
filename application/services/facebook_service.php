@@ -3,13 +3,23 @@
 class FacebookService{
 
 
-    private $client_id = '923971677700151'; // Client ID
-    private $client_secret = '547ec3fe4ae3e43c5e9cb64b13d3c3ca'; // Client secret
-    private $redirect_uri = 'http://facebook.auth/facebook/index/'; // Redirect URIs
+    private $client_id; // Client ID
+    private $client_secret; // Client secret
+    private $redirect_uri ; // Redirect URIs
 
     private $accessToken;
     private $currentUserId;
 
+
+    function __construct(){
+
+        $configs = parse_ini_file('config.ini');
+
+        $this->client_id = $configs['facebook_client_id'];
+        $this->client_secret = $configs['facebook_client_secret'];
+
+        $this->redirect_uri = 'http://'.$_SERVER['HTTP_HOST'].'/facebook/index/';
+    }
 
 
     private function getParams(){
@@ -20,6 +30,7 @@ class FacebookService{
             'scope'         => 'email,user_birthday'
         );
     }
+
 
     public function getAuthLinkUrl(){
 
