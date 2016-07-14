@@ -20,27 +20,24 @@
         </form>
 
 
-        <pre>
             <?php
 
-//            print_r($commentsTree);
-//
-//            function  build_tree($commentsTree,$parent_id){
-//                if(is_array($commentsTree) && isset($commentsTree[$parent_id])){
-//                    $tree = '<ul>';
-//                    foreach($commentsTree[$parent_id] as $cat){
-//                        $tree .= '<li>'.$cat['body'];
-//                        $tree .=  build_tree($commentsTree,$cat['id']);
-//                        $tree .= '</li>';
-//                    }
-//                    $tree .= '</ul>';
-//                }
-//                else return null;
-//                return $tree;
-//            }
-//
-//            echo build_tree($commentsTree,0);
+            function  build_tree($commentsTree,$parent_id){
+                if(is_array($commentsTree) && isset($commentsTree[$parent_id])){
+                    $tree = '<ul>';
+                    foreach($commentsTree[$parent_id] as $comment){
+                        $tree .= '<li>'.$comment['body'] . ' parent_id is ' . $parent_id;
+                        $tree .=  build_tree($commentsTree,$comment['id']);
+                        $tree .= '</li>';
+                    }
+                    $tree .= '</ul>';
+                }
+                else return null;
+                return $tree;
+            }
+
+            echo build_tree($commentsTree,0);
             ?>
-        </pre>
+
     </div>
 </div>
