@@ -11,7 +11,7 @@ class Model_Comments extends Model
     }
 
     function getAllCommentsTree(){
-        $sql = "SELECT t1.id, t1.parent_id, t1.body, t1.date_created, t1.date_updated, t2.fb_id, t2.picture FROM comments t1 LEFT JOIN users t2 ON t1.user_id = t2.fb_id WHERE t1.parent_id = 0 ORDER BY date_created DESC";
+        $sql = $this->getCommentWithUserInfoSql("WHERE t1.parent_id = 0 ORDER BY date_created DESC");
         $stmt = $this->pdo->query($sql);
 
         $comments = array();
@@ -19,13 +19,17 @@ class Model_Comments extends Model
             $comments[$comment['parent_id']][] =  $comment;
         }
 
-        $sql = "SELECT t1.id, t1.parent_id, t1.body, t1.date_created, t1.date_updated, t2.fb_id, t2.picture  FROM comments t1 LEFT JOIN users t2 ON t1.user_id = t2.fb_id WHERE t1.parent_id != 0 ORDER BY date_created ASC";
+        $sql = $this->getCommentWithUserInfoSql("WHERE t1.parent_id != 0 ORDER BY date_created ASC");
         $stmt = $this->pdo->query($sql);
         while ($comment = $stmt->fetch()){
             $comments[$comment['parent_id']][] =  $comment;
         }
 
         return $comments;
+    }
+
+    function getCommentWithUserInfoSql($condition = null){
+        return "SELECT t1.id, t1.parent_id, t1.body, t1.date_created, t1.date_updated, t2.fb_id, t2.picture, t2.name as username  FROM comments t1 LEFT JOIN users t2 ON t1.user_id = t2.fb_id ".$condition;
     }
 
 

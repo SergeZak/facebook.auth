@@ -30,7 +30,7 @@
             function  build_tree($commentsTree,$parent_id, $userId){
 
                 if(is_array($commentsTree) && isset($commentsTree[$parent_id])){
-                    $tree = '<ul>';
+                    $tree = '<ul class="comment-list">';
                     foreach($commentsTree[$parent_id] as $comment){
 
                         $commentBtn = $userId > 0 ? '<p><a href="javascript:void(0)" class="showModal" data-comment-id="'.$comment['id'].'">Comment</a></p>' : '';
@@ -38,6 +38,11 @@
 
                         $tree .= '<li>
                                     <img src="'.$comment['picture'].'">
+                                    <p class="user-name">'.$comment['username'] . '</p>
+                                    <p class="comment-dates">
+                                        created: <span>'.date("F j, Y, g:i a", strtotime($comment['date_created'])) . '</span>
+                                        updated: <span>'.date("F j, Y, g:i a", strtotime($comment['date_updated'])) . '</span>
+                                    </p>
                                     <p class="comment-body-'.$comment['id'].'">'.$comment['body'] . '</p>
 
                                     '.$commentBtn
