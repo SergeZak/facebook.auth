@@ -16,14 +16,14 @@
 
         <h4>Type a new comment. Have fun!</h4>
         <form action="/comments/add_comment" method="post" class="form-group">
-            <textarea name="comment_body" class="form-control"></textarea>
+            <textarea name="comment_body" class="form-control comment-textarea"></textarea>
             <input type="hidden" name="parent_id">
 
-            <button type="submit" class="btn btn-primary">Send Comment</button>
+            <button type="submit" class="btn btn-primary send-comment-btn">Send Comment</button>
         </form>
 
         <?php } else { ?>
-            <h3>Only authorized user can add comments.<br /> To login, please follow the <a href="/">link</a></h3>
+            <h3 class="unauth-warn">Only authorized user can add comments. To sign in, please follow the <a href="/">link</a></h3>
         <?php }  ?>
 
             <?php

@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <title>Главная</title>
+    <title>Comments</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -39,34 +39,36 @@
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                    </li>
-                    <li class="divider"></li>
+            <?php if($user){ ?>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $user['name']?> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
                     <li>
                         <a href="/main/logout/"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                     </li>
                 </ul>
-            </li>
+            <?php } else{ ?>
+                <li>
+                    <a href="/main/logout/"><i class="fa fa-fw fa-power-off"></i> Sign In</a>
+                </li>
+            <?php } ?>
         </ul>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
+                <?php if(!$user){ ?>
                 <li>
                     <a href="/"><i class="fa fa-facebook-square" aria-hidden="true"></i> Login</a>
                 </li>
+                <?php } ?>
                 <li>
                     <a href="/comments"><i class="fa fa-comments-o" aria-hidden="true"></i> Comments</a>
                 </li>
+                <?php if($user){ ?>
+                    <li>
+                        <a href="/main/logout"><i class="fa fa-facebook-square" aria-hidden="true"></i> Log Out</a>
+                    </li>
+                <?php } ?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

@@ -42,3 +42,23 @@ p.comment-body{
 .comment-btns a:hover{
     text-decoration: none;
 }
+
+.unauth-warn{
+    margin: 10px 0 30px;
+}
+
+.send-comment-btn{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.comment-textarea{
+    width: 50%;
+}
+
+
+@media (max-width: 991px) {
+    .comment-textarea{
+        width: 100%;
+    }
+}

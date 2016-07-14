@@ -15,9 +15,11 @@ class Controller_Comments extends Controller
         $commentsTree = $this->model->getAllCommentsTree();
 
         $userId = $this->facebook->isLogged()? $_SESSION['user_id'] : 0;
+        $user = $this->model->getUserByFbId($userId);
 
-        $this->view->generate('comments_view.php', compact('commentsTree', 'userId'));
+        $this->view->generate('comments_view.php', compact('commentsTree', 'userId', 'user'));
     }
+
 
     function action_add_comment(){
         if(isset($_POST['comment_body']) && isset($_POST['parent_id'])){

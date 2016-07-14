@@ -12,18 +12,17 @@ class Controller_Main extends Controller
     function action_index()
     {
 
-        $authFacebookLink = $this->facebook->getAuthLinkUrl();
-
-        if(!$isLogged = $this->facebook->isLogged()){
-            $user = $this->facebook->AuthenticateUser();
-            $this->model->proccessUser($user);
+        if(!$this->facebook->isLogged()){
+            $authFacebookLink = $this->facebook->getAuthLinkUrl();
+            $user = false;
+            $this->view->generate('main_view.php', compact('authFacebookLink', 'user'));
         }
         else{
-            $user = $this->model->getUserByFbId($_SESSION['user_id']);
+            $this->redirect('/comments');
         }
 
 
-        $this->view->generate('main_view.php', compact('authFacebookLink', 'user', 'isLogged'));
+
     }
 
     function action_logout(){

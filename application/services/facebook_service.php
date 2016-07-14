@@ -5,7 +5,7 @@ class FacebookService{
 
     private $client_id = '923971677700151'; // Client ID
     private $client_secret = '547ec3fe4ae3e43c5e9cb64b13d3c3ca'; // Client secret
-    private $redirect_uri = 'http://facebook.auth/main/index/'; // Redirect URIs
+    private $redirect_uri = 'http://facebook.auth/facebook/index/'; // Redirect URIs
 
     private $accessToken;
     private $currentUserId;
