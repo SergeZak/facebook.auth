@@ -41,4 +41,14 @@ class Model_Comments extends Model
 
         return $res;
     }
+
+    function edit_comment($commentBody, $commentId){
+        $body = $commentBody;
+        $dateUpdated = date("Y-m-d H:i:s",time());
+
+        $sql = "UPDATE comments SET body = ? , date_updated = ? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $res = $stmt->execute([$body, $dateUpdated, $commentId]);
+        return $res;
+    }
 }

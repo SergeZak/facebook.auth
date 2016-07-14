@@ -14,7 +14,9 @@ class Controller_Comments extends Controller
 
         $commentsTree = $this->model->getAllCommentsTree();
 
-        $this->view->generate('comments_view.php', compact('commentsTree'));
+        $userId = $_SESSION['user_id']? $_SESSION['user_id'] : 0;
+
+        $this->view->generate('comments_view.php', compact('commentsTree', 'userId'));
     }
 
     function action_add_comment(){
@@ -33,7 +35,24 @@ class Controller_Comments extends Controller
                 echo "No";
             }
         }
+    }
 
 
+    function action_edit_comment(){
+        if(isset($_POST['comment_body']) && isset($_POST['comment_id'])){
+
+            $body = $_POST['comment_body'];
+            $comment_id = $_POST['comment_id'];
+
+            $res = $this->model->edit_comment($body, $comment_id);
+
+
+            if($res){
+                $this->redirect('/comments');
+            }
+            else{
+                echo "No";
+            }
+        }
     }
 }
