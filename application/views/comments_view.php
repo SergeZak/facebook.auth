@@ -12,6 +12,8 @@
     <div class="col-md-12">
 
 
+        <?php if($userId){ ?>
+
         <form action="/comments/add_comment" method="post" class="form-group">
             <textarea name="comment_body" class="form-control"></textarea>
             <input type="hidden" name="parent_id">
@@ -19,6 +21,9 @@
             <button type="submit" class="btn btn-primary">Send Comment</button>
         </form>
 
+        <?php } else { ?>
+            <h3>Only authorized user can add comments.<br /> To login, please follow the <a href="/">link</a></h3>
+        <?php }  ?>
 
             <?php
 
