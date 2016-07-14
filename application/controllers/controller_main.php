@@ -19,7 +19,7 @@ class Controller_Main extends Controller
             $this->model->proccessUser($user);
         }
         else{
-            $user = $this->model->getUserByFbId($_COOKIE['user_id']);
+            $user = $this->model->getUserByFbId($_SESSION['user_id']);
         }
 
 

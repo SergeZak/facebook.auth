@@ -15,4 +15,11 @@ class Controller {
     function action_index()
     {
     }
+
+    function redirect($url){
+
+        header('Location: http://'.$_SERVER['HTTP_HOST']. $url);
+        exit;
+
+    }
 }

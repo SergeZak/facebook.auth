@@ -56,8 +56,11 @@ class FacebookService{
     }
 
     private function setAuthCookies(){
-        setcookie("access_token", $this->accessToken, time()+60*60*2);
-        setcookie("user_id", $this->currentUserId, time()+60*60*2);
+//        setcookie("access_token", $this->accessToken, time()+60*60*2, '/');
+//        setcookie("user_id", $this->currentUserId, time()+60*60*2, '/');
+
+        $_SESSION['user_id'] = $this->currentUserId;
+        $_SESSION['access_token'] = $this->accessToken;
     }
 
 
@@ -110,12 +113,12 @@ class FacebookService{
 
     public function isLogged(){
 
-        if(!isset($_COOKIE['access_token']) && !isset($_COOKIE['user_id'])){
+        if(!isset($_SESSION['access_token']) && !isset($_SESSION['user_id'])){
             return false;
         }
 
-        $userdId = $_COOKIE['user_id'];
-        $accessToken = $_COOKIE['access_token'];
+        $userdId = $_SESSION['user_id'];
+        $accessToken = $_SESSION['access_token'];
 
         $url = 'https://graph.facebook.com/v2.5/'.$userdId.'?access_token='.$accessToken.'&fields=id,email,name,picture,first_name,last_name,is_verified,link,middle_name';
 
