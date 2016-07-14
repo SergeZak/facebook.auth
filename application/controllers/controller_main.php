@@ -26,4 +26,9 @@ class Controller_Main extends Controller
         $this->view->generate('main_view.php', compact('authFacebookLink', 'user', 'isLogged'));
     }
 
+    function action_logout(){
+        session_destroy();
+        $this->redirect('/');
+    }
+
 }
