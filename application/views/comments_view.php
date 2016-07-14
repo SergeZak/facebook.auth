@@ -33,13 +33,15 @@
                     $tree = '<ul>';
                     foreach($commentsTree[$parent_id] as $comment){
 
+                        $commentBtn = $userId > 0 ? '<p><a href="javascript:void(0)" class="showModal" data-comment-id="'.$comment['id'].'">Comment</a></p>' : '';
                         $editBtn = ($userId == $comment['fb_id'])? '<p><a href="javascript:void(0)" class="showEditModal" data-comment-id="'.$comment['id'].'">Edit</a></p>' : '';
 
                         $tree .= '<li>
                                     <img src="'.$comment['picture'].'">
                                     <p class="comment-body-'.$comment['id'].'">'.$comment['body'] . '</p>
-                                    <p><a href="javascript:void(0)" class="showModal" data-comment-id="'.$comment['id'].'">Comment</a></p>
-                                    '.$editBtn;
+
+                                    '.$commentBtn
+                                    .$editBtn;
 
                         $tree .=  build_tree($commentsTree,$comment['id'], $userId);
                         $tree .= '</li>';

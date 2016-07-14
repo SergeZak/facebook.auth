@@ -11,10 +11,10 @@ class Controller_Main extends Controller
     
     function action_index()
     {
-        $isLogged = $this->facebook->isLogged();
+
         $authFacebookLink = $this->facebook->getAuthLinkUrl();
 
-        if(!$isLogged){
+        if(!$isLogged = $this->facebook->isLogged()){
             $user = $this->facebook->AuthenticateUser();
             $this->model->proccessUser($user);
         }
