@@ -11,6 +11,9 @@ class Controller_Comments extends Controller
     
     function action_index()
     {
-        $this->view->generate('comments_view.php');
+
+        $commentsTree = $this->model->getAllCommentsTree();
+
+        $this->view->generate('comments_view.php', compact('commentsTree'));
     }
 }
