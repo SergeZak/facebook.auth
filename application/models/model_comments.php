@@ -37,7 +37,7 @@ class Model_Comments extends Model
 
         $sql = 'INSERT INTO comments (parent_id, user_id, body, date_created, date_updated) VALUES (?,?,?,?,?)';
         $stmt = $this->pdo->prepare($sql);
-        $res = $stmt->execute([1, $userId, $body, date("Y-m-d H:i:s", $dateCreated), date("Y-m-d H:i:s", $dateUpdated)]);
+        $res = $stmt->execute([$parentId, $userId, $body, date("Y-m-d H:i:s", $dateCreated), date("Y-m-d H:i:s", $dateUpdated)]);
 
         return $res;
     }
