@@ -18,6 +18,7 @@ p.user-name{
     font-size: 0.9em;
     font-style: italic;
     font-weight: 600;
+    color: #001b6c;
 }
 
 p.comment-dates{
@@ -61,4 +62,8 @@ p.comment-body{
     .comment-textarea{
         width: 100%;
     }
+}
+
+.user-name.curr-user{
+    color: #828282;
 }

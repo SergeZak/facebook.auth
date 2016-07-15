@@ -36,13 +36,14 @@
 
 
                         $editedDate = $comment['date_created'] == $comment['date_updated'] ? 'edited: <span>'.date("F j, Y, g:i a", strtotime($comment['date_updated'])) . '</span>' : '';
-                        $commentBtn = $userId > 0 ? '<a href="javascript:void(0)" class="showModal" data-comment-id="'.$comment['id'].'">Comment</a>' : '';
+                        $commentBtn = $userId > 0 ? '<a href="javascript:void(0)" class="showModal" data-comment-id="'.$comment['id'].'">Reply</a>' : '';
                         $editBtn = ($userId == $comment['fb_id'])? '<a href="javascript:void(0)" class="showEditModal" data-comment-id="'.$comment['id'].'">Edit</a>' : '';
+                        $currUserCss = $userId == $comment['fb_id'] ? 'curr-user' : '';
 
 
                         $tree .= '<li>
                                     <img src="'.$comment['picture'].'">
-                                    <p class="user-name">'.$comment['username'] . '</p>
+                                    <p class="user-name '. $currUserCss .'">'.$comment['username'] . '</p>
                                     <p class="comment-body comment-body-'.$comment['id'].'">'.$comment['body'] . '</p>
                                     <p class="comment-dates">
                                         posted: <span>'.date("F j, Y, g:i a", strtotime($comment['date_created'])) . '</span>.
@@ -61,6 +62,7 @@
             }
 
             echo build_tree($commentsTree,0, $userId);
+
             ?>
 
     </div>
