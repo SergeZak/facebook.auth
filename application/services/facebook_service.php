@@ -82,7 +82,7 @@ class FacebookService{
 
         $url = 'https://graph.facebook.com/v2.5/'.$userdId.'?access_token='.$accessToken.'&fields=id,email,name,picture,first_name,last_name,is_verified,link,middle_name';
 
-        $output = $this->sendCurlGetReq($url);
+        $output = CurlService::sendCurlGetReq($url);
 
         return json_decode($output, 1);
 
@@ -95,7 +95,7 @@ class FacebookService{
 
             $url = 'https://graph.facebook.com/me' . '?' . urldecode(http_build_query($params));
 
-            $output = $this->sendCurlGetReq($url);
+            $output = CurlService::sendCurlGetReq($url);
 
             $userInfo = json_decode($output,1);
 
@@ -116,7 +116,7 @@ class FacebookService{
 
         $url = 'https://graph.facebook.com/oauth/access_token?'. http_build_query($params);
 
-        $result = $this->sendCurlGetReq($url);
+        $result = CurlService::sendCurlGetReq($url);
 
         return $result;
     }
@@ -133,23 +133,12 @@ class FacebookService{
 
         $url = 'https://graph.facebook.com/v2.5/'.$userdId.'?access_token='.$accessToken.'&fields=id,email,name,picture,first_name,last_name,is_verified,link,middle_name';
 
-        $result = json_decode($this->sendCurlGetReq($url),1);
+        $result = json_decode(CurlService::sendCurlGetReq($url),1);
 
         if(!!$result && isset($result['id']) && !isset($result['error'])){
             return true;
         }
         return false;
-    }
-
-
-    private function sendCurlGetReq($url){
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $output = curl_exec($ch);
-        curl_close($ch);
-
-        return $output;
     }
 
 

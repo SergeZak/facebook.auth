@@ -66,7 +66,7 @@
                 </li>
                 <?php if($user){ ?>
                     <li>
-                        <a href="/main/logout"><i class="fa fa-facebook-square" aria-hidden="true"></i> Log Out</a>
+                        <a href="/main/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
                     </li>
                 <?php } ?>
             </ul>
